@@ -28,7 +28,7 @@ const syncUserDeletion = inngest.createFunction(
   {event:"clerk/user.deleted"},
   async ({ event}) => {
     const {data}= event
-    await prisma.user.detele({
+    await prisma.user.delete({
       where:{
         id:data.id
       }
@@ -72,7 +72,7 @@ const syncWorkspaceCreation= inngest.createFunction(
       }
     })
     // Add crator Admin in workspace memebers
-    await prisma .workspaceMember.create({
+    await prisma.workspaceMember.create({
       data:{
         userId:data.created_by,
         workspaceId:data.id,
