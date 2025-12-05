@@ -55,5 +55,86 @@ const syncUserUpdation = inngest.createFunction(
 
   }
 )
+// Innest Function to save workSpace data to database
+const syncWorkspaceCreation= inngest.createFunction(
+  {id:'sync-workspace-from -clerk'},
+  {even:'clerk/organisation.created'},
+  async ({ event })=>{
+    const{data}= event;
+    await prisma.workspace.create({
+      data:{
+        id:data.id,
+        name:data.name,
+        slug:data.slug,
+        ownerId:data.creator_by,
+        image:data.image_url,
+      }
+    })
+    // Add crator Admin in workspace memebers
+    await prisma .workspaceMember.create({
+      data:{
+        userId:data.created_by,
+        workspaceId:data.id,
+        role:'ADMIN',
+
+      }
+    })
+  }
+)
+// inngest function to update workspace  data in datatabase
+const syncWorkspaceUpdation= inngest.createFunction(
+  {id:'update-workspace-from -clerk'},
+  {even:'clerk/organisation.updated'},
+  async ({ event })=>{
+    const{data}= event;
+    await prisma.workspace.update({
+      where:{
+        id:data.id
+      },
+      data:{
+        name:data.name,
+        slug:data.slug,
+        image:data.image_url,
+      }
+    })
+  }
+)
+
+// inngest function to delete workspace data from database
+const syncWorkspaceDeletion= inngest.createFunction(
+  {id:'delete-workspace-with-clerk'},
+  {even:'clerk/organisation.deleted'},  
+  async ({ event })=>{
+    const{data}= event;
+    await prisma.workspace.delete({
+      where:{
+        id:data.id
+      }
+    })
+  }
+)
+// inggest function to save workspace member data to a database
+const syncWorkspaceMemberCreation= inngest.createFunction(
+  {id:'sync-workspace-member-from -clerk'},
+  {even:'clerk/organisationInvitatin.accepted'},
+  async ({ event })=>{
+    const {data}=event;
+    await prisma.workspaceMember.create({
+      data:{
+        userId:data.user_id,
+        workspaceId:data.organization_id,
+        role:String(data.role_name).toUpperCase(),
+
+      }
+    })
+  }
+)
+
+
+
+
+
+
 // Create an empty array where we'll export future Inngest functions
-export const functions = [syncUserCreation,syncUserDeletion ,syncUserUpdation];
+export const functions = [syncUserCreation,syncUserDeletion ,syncUserUpdation ,syncWorkspaceUpdation 
+  ,syncWorkspaceDeletion,syncWorkspaceMemberCreation,syncWorkspaceCreation];
