@@ -13,6 +13,8 @@
     "@clerk/clerk-react": "^5.53.8",
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.12",
+    "axios": "^1.13.2",
+    "baseline-browser-mapping": "^2.9.6",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.540.0",
     "react": "^19.1.1",
@@ -33,5 +35,10 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
     "vite": "^7.1.2"
-  }
+  },
+  "description": "<div align=\"center\">   <h1><img src=\"https://project-management-gs.vercel.app/favicon.ico\" width=\"20\" height=\"20\" alt=\"project-management Favicon\">    project-management</h1>   <p>     An open-source project management platform built with ReactJS and Tailwind CSS.   </p>   <p>     <a href=\"https://github.com/GreatStackDev/project-management/blob/main/LICENSE.md\"><img src=\"https://img.shields.io/github/license/GreatStackDev/project-management?style=for-the-badge\" alt=\"License\"></a>     <a href=\"https://github.com/GreatStackDev/project-management/pulls\"><img src=\"https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge\" alt=\"PRs Welcome\"></a>     <a href=\"https://github.com/GreatStackDev/project-management/issues\"><img src=\"https://img.shields.io/github/issues/GreatStackDev/project-management?style=for-the-badge\" alt=\"GitHub issues\"></a>   </p> </div>",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

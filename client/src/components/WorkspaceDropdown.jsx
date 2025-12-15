@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentWorkspace } from "../features/workspaceSlice";
 import { useNavigate } from "react-router-dom";
 import { dummyWorkspaces } from "../assets/assets";
+import {useClerk , useOrganizationList} from "@clerk/clerk-react";
 
 function WorkspaceDropdown() {
+    const { setActive,useMemberships,isLoaded}=useOrganizationList({useMemberships:true})
+    const {openCreateOrganizationModal}=useClerk()
 
     const { workspaces } = useSelector((state) => state.workspace);
     const currentWorkspace = useSelector((state) => state.workspace?.currentWorkspace || null);
@@ -16,6 +19,7 @@ function WorkspaceDropdown() {
     const navigate = useNavigate();
 
     const onSelectWorkspace = (organizationId) => {
+        setActive ({organization:organizationId})
         dispatch(setCurrentWorkspace(organizationId))
         setIsOpen(false);
         navigate('/')
