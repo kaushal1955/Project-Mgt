@@ -42,7 +42,7 @@ export const addMember= async (req,res) => {
       return res.status(404).json({message:"use not found"})
     }
     if(!workspaceId || !role){
-      return res.status(400).json({message:"Misssing required parameters"})
+      return res.status(400).json({message:"Missing required parameters"})
       
     }
     if(!["ADMIN","MEMBER"].includes(role)){
@@ -73,7 +73,7 @@ export const addMember= async (req,res) => {
         message,
       } 
     })
-    res.json({member,message:"Membber added successfully"})    
+    res.json({member,message:"Member added successfully"})    
 
   } catch (error){
     console.log(error);
